@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
-from .serializers import UserRegistrationSerializer
+from jwt_auth.serializers import UserRegistrationSerializer
 from django.contrib.auth.models import User
 
 

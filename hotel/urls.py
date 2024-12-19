@@ -19,19 +19,23 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from rest_framework import routers
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
-from room.routers import router as room_router
-from booking.routers import router as booking_router
-from auth.routers import router as auth_router
+from room.views import RoomViewSet
+from booking.views import BookingViewSet
+from jwt_auth.views import UserRegistrationViewSet
+
+router = routers.DefaultRouter()
+router.register("register", UserRegistrationViewSet)
+router.register("room", RoomViewSet)
+router.register("booking", BookingViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(auth_router.urls)),
+    path('api/v1/', include(router.urls)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/v1/', include(room_router.urls)),
-    path('api/v1/', include(booking_router.urls)),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),
 ]

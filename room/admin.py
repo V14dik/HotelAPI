@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import Room
+from room.models import Room, Equipment
 
-# Register your models here.
 
-admin.site.register(Room)
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ['description', 'room_level', 'square', 'cost']
+    list_filter = ['room_level', 'square', 'cost']
+
+
+admin.site.register(Room, RoomAdmin)
+admin.site.register(Equipment)

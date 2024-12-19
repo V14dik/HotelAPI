@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'room',
     'booking',
     'rest_framework_simplejwt',
-    'drf_spectacular'
+    'drf_spectacular',
 ]
 
 
